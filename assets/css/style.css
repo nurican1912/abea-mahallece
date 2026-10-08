@@ -1,0 +1,453 @@
+/*
+ * Mahallece — tek sayfalık proje sitesi
+ * Renkler ve yazı tipi Afet Bilinci EAD'nin ana sitesiyle aynıdır.
+ * Telefon öncelikli: temel kurallar dar ekran içindir, genişledikçe eklenir.
+ */
+
+:root {
+  --brand: #28ade5;          /* logonun turkuazı — çizgi ve dekor; açık zeminde metin rengi DEĞİL */
+  --primary: #123b5d;        /* koyu lacivert */
+  --primary-strong: #1a4c75;
+  --cta: #f4b740;            /* kehribar — yalnızca "Gönüllü Ol" */
+  --cta-strong: #e7a72d;
+  --ink: #0e2a38;            /* gövde metni */
+  --muted: #5b7787;
+  --surface: #ffffff;
+  --surface-soft: #f4f2ed;   /* sıcak bej */
+  --line: #e5e0d6;
+
+  --font: 'Barlow', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Barlow Semi Condensed', 'Barlow', system-ui, sans-serif;
+
+  --topbar-height: 4rem;
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--topbar-height) + 1rem); /* çapa bağlantılarında başlık çubuğun altında kalmasın */
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+body {
+  margin: 0;
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+svg { display: block; max-width: 100%; }
+
+h1, h2, h3, p, dl, dd, ol, ul { margin: 0; }
+ol, ul { padding: 0; list-style: none; }
+
+a { color: inherit; }
+
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+.container {
+  width: 100%;
+  max-width: 72rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 50;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  background: var(--ink);
+  color: #fff;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus { transform: none; }
+
+.eyebrow {
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+
+/* ---- Butonlar ------------------------------------------------------------ */
+
+.button {
+  display: inline-flex;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0 1.5rem;
+  border: 2px solid transparent;
+  border-radius: 11px;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.button__icon { width: 1.125rem; height: 1.125rem; flex-shrink: 0; }
+
+.button--cta { background: var(--cta); color: var(--ink); }
+.button--cta:hover { background: var(--cta-strong); }
+
+.button--outline { border-color: var(--primary); background: transparent; color: var(--primary); }
+.button--outline:hover { background: var(--primary); color: #fff; }
+
+.button--compact { min-height: 2.75rem; padding: 0 1rem; font-size: 0.9375rem; }
+.button--large { min-height: 3.5rem; padding: 0 2rem; font-size: 1.125rem; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .button--cta:hover { transform: translateY(-1px); box-shadow: 0 8px 18px -10px rgb(14 42 56 / 0.5); }
+}
+
+/* ---- Üst çubuk ------------------------------------------------------------ */
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  border-bottom: 2px solid var(--brand);
+  background: var(--surface);
+}
+
+.topbar__inner {
+  display: flex;
+  min-height: var(--topbar-height);
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.logos { display: flex; align-items: center; gap: 0.75rem; min-width: 0; }
+.logos__abea { width: auto; height: 2.5rem; flex-shrink: 0; color: var(--brand); }
+.logos__wordmark { font-family: var(--font-display); font-weight: 600; }
+.logos__divider { width: 1px; height: 2rem; flex-shrink: 0; background: var(--line); }
+.logos__partner { width: auto; height: 1.75rem; }
+
+/* ---- Giriş ---------------------------------------------------------------- */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+}
+
+.hero__rings {
+  position: absolute;
+  top: -6rem;
+  right: -9rem;
+  width: 24rem;
+  height: 24rem;
+  color: var(--brand);
+  opacity: 0.09;
+  pointer-events: none;
+}
+
+.hero__inner { position: relative; padding-block: 3rem 3.5rem; }
+
+.hero__title {
+  margin-top: 1rem;
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 15vw, 7.5rem);
+  font-weight: 600;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+}
+
+.hero__subtitle {
+  margin-top: 0.75rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--primary);
+}
+
+.facts {
+  display: grid;
+  gap: 1rem;
+  margin-top: 2.25rem;
+  padding-top: 1.5rem;
+  border-top: 2px solid var(--brand);
+  max-width: 56rem;
+}
+
+.facts dt {
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.facts dd { margin-top: 0.125rem; font-size: 1.125rem; font-weight: 500; line-height: 1.35; }
+
+.hero__actions { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 2.25rem; }
+
+/* ---- Bölümler ------------------------------------------------------------- */
+
+.section { padding-block: 3.5rem; }
+.section--soft { background: var(--surface-soft); }
+
+.section__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.875rem, 4vw, 2.5rem);
+  font-weight: 600;
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+/* Başlığın solundaki kısa turkuaz çizgi — üst çubuktaki çizginin devamı gibi */
+.section__title::before {
+  content: '';
+  display: block;
+  width: 3rem;
+  height: 3px;
+  margin-bottom: 1rem;
+  background: var(--brand);
+}
+
+.section__grid { display: grid; gap: 1.5rem; }
+
+.prose { max-width: 68ch; }
+.prose > * + * { margin-top: 1rem; }
+.prose strong { font-weight: 600; }
+.prose--lead { font-size: 1.25rem; line-height: 1.55; }
+.prose--wide { margin-top: 2rem; }
+
+/* Öne çıkan not: solunda turkuaz çizgi */
+.note {
+  padding: 1rem 1.25rem;
+  border-left: 4px solid var(--brand);
+  background: var(--surface);
+  font-weight: 500;
+}
+
+.note--wide { max-width: 68ch; margin-top: 2rem; }
+
+/* ---- Hedefler -------------------------------------------------------------- */
+
+.goals { display: grid; gap: 0.75rem; margin-top: 2rem; }
+
+.goal {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.5rem;
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--brand);
+  border-radius: 0 0 0.75rem 0.75rem;
+  background: var(--surface);
+}
+
+.goal__label {
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+
+.goal__title {
+  font-family: var(--font-display);
+  font-size: 1.375rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+/* ---- Paydaşlar ------------------------------------------------------------- */
+
+.partners { display: grid; gap: 0.75rem; margin-top: 2rem; }
+
+.card {
+  padding: 1.5rem;
+  border: 1px solid var(--line);
+  border-radius: 0.75rem;
+  background: var(--surface);
+}
+
+.card__title { font-family: var(--font-display); font-size: 1.375rem; font-weight: 600; line-height: 1.2; }
+
+.list { display: grid; gap: 0.625rem; margin-top: 1rem; }
+
+.list li { position: relative; padding-left: 1.5rem; }
+
+.list li::before {
+  content: '';
+  position: absolute;
+  top: 0.7em;
+  left: 0;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--brand);
+}
+
+/* ---- Gönüllü Ol ------------------------------------------------------------ */
+
+.join {
+  position: relative;
+  overflow: hidden;
+  background: var(--primary);
+  color: #fff;
+}
+
+.join__rings {
+  position: absolute;
+  bottom: -12rem;
+  left: -10rem;
+  width: 30rem;
+  height: 30rem;
+  color: #fff;
+  opacity: 0.05;
+  pointer-events: none;
+}
+
+.join__inner { position: relative; padding-block: 4rem; }
+
+.join__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  font-weight: 600;
+  line-height: 1;
+}
+
+.join__text { max-width: 44ch; margin-block: 1.25rem 2rem; font-size: 1.1875rem; color: rgb(255 255 255 / 0.85); }
+
+.join :focus-visible { outline-color: #fff; }
+
+/* ---- Form (butona basılınca açılır) ---------------------------------------- */
+
+.form-panel {
+  padding-block: 2.5rem 3.5rem;
+  background: var(--surface-soft);
+  /* html'deki kaydırma payı çubuk + 1rem; panel çubuğun hemen altına otursun diye 1rem geri alınır. */
+  scroll-margin-top: -1rem;
+  /* Form yüklenmeden de sayfa, paneli çubuğun altına getirecek kadar uzun olsun. */
+  min-height: 100vh;
+  min-height: 100svh;
+}
+
+.form-panel[hidden] { display: none; }
+
+.form-panel__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.form-panel__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.625rem, 4vw, 2.25rem);
+  font-weight: 600;
+  line-height: 1.1;
+  outline: none;
+}
+
+.form-panel__frame {
+  position: relative;
+  min-height: 24rem;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 0.75rem;
+  background: var(--surface);
+}
+
+.form-panel__frame iframe {
+  display: block;
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  border: 0;
+  /* Jotform sayfa değiştirirken formu görünür alana kaydırır; html'deki kaydırma payı çubuğun altında kalmasını önler. */
+}
+
+.form-panel__status { padding: 3rem 1.5rem; text-align: center; color: var(--muted); }
+.form-panel__status[hidden] { display: none; }
+
+.form-panel__help { margin-top: 1rem; font-size: 0.9375rem; color: var(--muted); }
+.form-panel__help a { color: var(--ink); text-decoration-color: var(--brand); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+
+/* ---- Alt bölüm ------------------------------------------------------------- */
+
+.footer { background: var(--ink); color: rgb(255 255 255 / 0.8); font-size: 0.9375rem; }
+.footer__inner { display: grid; gap: 0.5rem; padding-block: 2.5rem; }
+.footer__title { font-family: var(--font-display); font-size: 1.125rem; font-weight: 600; color: #fff; }
+.footer a { color: #fff; text-decoration-color: var(--brand); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.footer :focus-visible { outline-color: #fff; }
+
+/* ---- Giriş hareketi: bölümler görünür olunca hafifçe yükselerek belirir ------ */
+/* Yalnızca JS varken ve hareket azaltma kapalıyken; aksi hâlde her şey görünür durur. */
+
+@media (prefers-reduced-motion: no-preference) {
+  .js .reveal {
+    opacity: 0;
+    transform: translateY(1rem);
+    transition: opacity 0.6s ease, transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+    transition-delay: var(--reveal-delay, 0s);
+  }
+
+  .js .reveal.is-visible { opacity: 1; transform: none; }
+}
+
+/* ---- Geniş ekranlar -------------------------------------------------------- */
+
+@media (min-width: 40rem) {
+  .container { padding-inline: 1.5rem; }
+  .logos { gap: 1rem; }
+  .logos__abea { height: 2.75rem; }
+  .logos__partner { height: 2rem; }
+  .facts { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; }
+  .hero__actions { flex-direction: row; flex-wrap: wrap; }
+  .goals { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .partners { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .goal, .card { padding: 1.75rem; }
+}
+
+@media (min-width: 64rem) {
+  :root { --topbar-height: 5rem; }
+  .container { padding-inline: 2rem; }
+  .logos__abea { height: 3.5rem; }
+  .logos__divider { height: 2.75rem; }
+  .logos__partner { height: 2.5rem; }
+  .hero__rings { top: -8rem; right: -6rem; width: 40rem; height: 40rem; }
+  .hero__inner { padding-block: 5rem 5.5rem; }
+  .section { padding-block: 5.5rem; }
+  /* Solda başlık, sağda metin */
+  .section__grid { grid-template-columns: 18rem minmax(0, 1fr); gap: 4rem; }
+  .goals { grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 3rem; }
+  .prose--wide { margin-top: 3rem; }
+  .join__inner { padding-block: 6rem; }
+  .form-panel { padding-block: 3.5rem 5rem; }
+}
